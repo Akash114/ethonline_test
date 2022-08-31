@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { WagmiConfig, createClient } from 'wagmi'
+import { getDefaultProvider } from 'ethers'
+import Profile from './components/Profile'
 
 function App() {
-  return (
+
+  const client_ = createClient({
+    autoConnect: true,
+    provider: getDefaultProvider(),
+  })
+
+
+  return(
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <WagmiConfig client={client_}>
+      <Profile />
+    </WagmiConfig>
+
+      {/* <Conversations /> */}
+
     </div>
   );
 }
