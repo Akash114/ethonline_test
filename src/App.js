@@ -1,7 +1,6 @@
 import { WagmiConfig, createClient } from 'wagmi'
 import { getDefaultProvider } from 'ethers'
 import Profile from './components/xmtp/xmtp'
-
 function App() {
 
   const client_ = createClient({

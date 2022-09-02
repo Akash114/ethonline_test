@@ -1,4 +1,5 @@
 module.exports = function override (config, env) {
+  const webpack = require("webpack")
   console.log('override')
   let loaders = config.resolve
   loaders.fallback = {
@@ -12,8 +13,16 @@ module.exports = function override (config, env) {
       "stream": require.resolve("stream-browserify"),
       "util": require.resolve("util/"),
       "crypto": require.resolve("crypto-browserify"),
-      "constants": require.resolve("constants-browserify")
+      "constants": require.resolve("constants-browserify"),
+      "buffer": require.resolve("buffer")
   }
-  
+  config.resolve.extensions = [...config.resolve.extensions, ".ts", ".js"]
+  config.plugins = [
+    ...config.plugins,
+    new webpack.ProvidePlugin({
+        process: "process/browser",
+        Buffer: ["buffer", "Buffer"],
+    }),
+]
   return config
 }
